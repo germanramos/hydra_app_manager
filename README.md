@@ -3,7 +3,7 @@ App Manager
 This application consist of 2 pieces:
 
 ### App Manager Info Server
-Monitors the system resources and the port our application is listening on and notifies.
+Monitors the system resources and the port our application is listening on and notifies. More information can be found <a href="https://github.com/innotech/hydra_basic_probe">here</a>.
 
 ### App Manager
 Ask periodically to the App Manager Info Server the state of the application and updates the corresponding Hydra server/s 
