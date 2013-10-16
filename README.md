@@ -47,5 +47,5 @@ git clone https://github.com/innotech/hydra_app_manager.git
 Start the App Manager application:
 
 ```
-python app_manager.py
+python app_manager.py -c app_manager.cfg
 ```
