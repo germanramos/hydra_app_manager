@@ -21,6 +21,7 @@ from logging.config import fileConfig
 from optparse import OptionParser
 import urllib2
 import ConfigParser
+from urlparse import urlparse
 
 __all__ = []
 __version__ = 1.0
@@ -78,10 +79,12 @@ def main(argv=None):
         # MAIN BODY #
         while True:
             try:
-                servers = []
+                servers = {}
                 logging.debug("*** BEGIN ITERATION ***")
                 for key,server in config.items("SERVERS"):
                     server_public,server_private = server.split(",")
+                    server_public_fragments = urlparse(server_public)
+                    server_key = server_public_fragments.netloc
                     logging.debug("Getting info from " + server_private)
                     try:
                         response = urllib2.urlopen(server_private, timeout=INFO_TIMEOUT)
@@ -101,16 +104,16 @@ def main(argv=None):
                         "cost": int(config.get("MAIN", "cost")),
                         "cloud": config.get("MAIN", "cloud"),
                         "status": {
-                                   "cpuLoad": cpuLoad,
-                                   "memLoad": memLoad,
-                                   "timeStamp": timestamp,
-                                   "stateEvents": {
-                                                   timestamp: state
-                                                   }
-                                   }
+                               "cpuLoad": cpuLoad,
+                               "memLoad": memLoad,
+                               "timeStamp": timestamp,
+                               "stateEvents": {
+                                   timestamp: state
+                               }
+                           }
                     }
                     logging.debug(server_item)
-                    servers.append(server_item)
+                    servers[server_key] = server_item
                 #End servers for
                 timestamp = int(round(time.time() * 1000))
                 localStrategyEvents = {
