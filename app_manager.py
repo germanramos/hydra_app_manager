@@ -32,7 +32,7 @@ DEBUG = 1
 TESTRUN = 0
 PROFILE = 0
 
-INFO_TIMEOUT = 1
+INFO_TIMEOUT = 5
 
 class stateEnum:
     READY = 0
