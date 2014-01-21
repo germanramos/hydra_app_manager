@@ -1,3 +1,5 @@
+Version 2.0.0
+
 App Manager
 ===========
 This application consist of 2 pieces:
